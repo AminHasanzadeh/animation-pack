@@ -1,0 +1,165 @@
+*, *::before, *::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+h1 {
+    font-size: 3em;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.box {
+    width: 100%;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.pen {
+    width: 300px;
+    height: 60px;
+    background-color: rgb(22, 22, 22);
+    border-radius: 10px;
+    position: relative;
+    animation: moving 10s ease-in-out;
+    animation-fill-mode: forwards;
+}
+.pen::before {
+    content: '';
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    top: 50%;
+    left: -20px;
+    background-color: rgb(22, 22, 22);
+    transform: translate(0, -50%) ;
+    border-radius: 50%;
+}
+.pen::after {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 30px;
+    top: 50%;
+    left: -45px;
+    transform: translate(0, -50%) skew(20deg);
+    background-color: rgb(22, 22, 22);
+}
+.target {
+    width: 400px;
+    height: 80px;
+    border: 10px solid rgb(22, 22, 22);
+    border-radius: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+    transform: translateY(130px);
+    overflow: hidden;
+}
+.target .color {
+    width: 10%;
+    height: 100%;
+    z-index: -1;
+}
+.target .color:nth-of-type(odd) {
+    transform: translateY(100%);
+    animation: colors-odd 1s ease-in-out;
+    animation-fill-mode: forwards;
+}
+.target .color:nth-of-type(even) {
+    transform: translateY(-100%);
+    animation: colors-even 1s ease-in-out;
+    animation-fill-mode: forwards;
+}
+.target .color:nth-of-type(1) {
+    background-color: #ff3333;
+    animation-delay: 0s;
+}
+.target .color:nth-of-type(2) {
+    background-color: #ff9633;
+    animation-delay: 1s;
+}
+.target .color:nth-of-type(3) {
+    background-color: #fcff33;
+    animation-delay: 2s;
+}
+.target .color:nth-of-type(4) {
+    background-color: #55ff33;
+    animation-delay: 3s;
+}
+.target .color:nth-of-type(5) {
+    background-color: #33ffbb;
+    animation-delay: 4s;
+}
+.target .color:nth-of-type(6) {
+    background-color: #3369ff;
+    animation-delay: 5s;
+}
+.target .color:nth-of-type(7) {
+    background-color: #8b33ff;
+    animation-delay: 6s;
+}
+.target .color:nth-of-type(8) {
+    background-color: #ff33e4;
+    animation-delay: 7s;
+}
+.target .color:nth-of-type(9) {
+    background-color: #ff3377;
+    animation-delay: 8s;
+}
+.target .color:nth-of-type(10) {
+    background-color: #ff3333;
+    animation-delay: 9s;
+}
+@keyframes moving {
+    0% {
+        transform: translate(0, 0) rotate(-20deg);
+    }
+    10% {
+        transform: translate(35px, -10px) rotate(-10deg);
+    }
+    20% {
+        transform: translate(70px, 0) rotate(-20deg);
+    }
+    30% {
+        transform: translate(105px, -10px) rotate(-10deg);
+    }
+    40% {
+        transform: translate(140px, 0) rotate(-20deg);
+    }
+    50% {
+        transform: translate(175px, -10px) rotate(-10deg);
+    }
+    60% {
+        transform: translate(210px, 0) rotate(-20deg);
+    }
+    70% {
+        transform: translate(245px, -10px) rotate(-10deg);
+    }
+    80% {
+        transform: translate(280px, 0) rotate(-20deg);
+    }
+    90% {
+        transform: translate(315px, -10px) rotate(-10deg);
+    }
+    100% {
+        transform: translate(360px, 0) rotate(-20deg);
+    } 
+}
+@keyframes colors-odd {
+    0% {
+        transform: translateY(100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+@keyframes colors-even {
+    0% {
+        transform: translateY(-100%);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}

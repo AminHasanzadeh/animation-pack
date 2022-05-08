@@ -1,0 +1,207 @@
+*, *::before, *::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+$clip: polygon(50% 0%, 0% 100%, 100% 100%);
+$clipEnd:polygon(50% 0%, 50% 100%, 50% 100%);
+$size: 300px;
+body {
+    background-color: #060a29;
+    overflow: hidden;
+}
+.scene {
+    width: 100%;
+    height: 100vmin;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    transform: translateX(-150px);
+    .pacman {
+        width: $size;
+        height: $size;
+        border-radius: 50%;
+        background-color: #ffef11;
+        position: relative;
+        animation: rotate 0.4s linear 1 12s forwards;
+        .mouth {
+            width: $size / 1.9;
+            height: $size / 1.9;
+            background-color: #060a29;
+            clip-path: $clip;
+            transform: rotate(90deg);
+            position: absolute;
+            top: calc(50% - 75px);
+            left: 0;
+            animation: pac-man 0.4s linear 30 alternate, pac-man 0.2s linear 24 15s alternate;
+        }
+    }
+    .ghost {
+        width: $size;
+        height: $size * 1.3;
+        border-radius: 300px 300px 0 0;
+        position: relative;
+        background-color: #ff1111;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: ghost-weak 8s linear 1 12s;
+        &::before {
+            content: '';
+            position: absolute;
+            width: 80%;
+            height: 70px;
+            clip-path: polygon(1% 87%, 27% 19%, 49% 86%, 73% 18%, 100% 89%, 100% 71%, 73% 2%, 50% 63%, 24% 2%, 0% 69%);
+            background-color: white;
+            bottom: 25%;
+            left: 10%;
+            opacity: 0;
+            animation: mouth 0.2s linear 1 12s forwards alternate;
+        }
+        .eyes {
+            width: $size / 3;
+            height: $size / 3;
+            background-color: white;
+            border-radius: 50%;
+            margin: 0 20px;
+            margin-top: -80px;
+            position: relative;
+            &::before {
+                content: '';
+                position: absolute;
+                top: 15px;
+                left: 0;
+                width: $size / 4;
+                height: $size / 4;
+                background-color: #0f1961;
+                border-radius: 50%;
+                animation: ghost-eyes 0.2s linear 1 12s forwards alternate;
+            }
+        }
+        .leg-box {
+            width: $size * 1.6;
+            height: $size / 4;
+            position: absolute;
+            bottom: -2px;
+            left: calc(50% - 265px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: legs 1s linear infinite alternate, legs 0.3s linear infinite 12s alternate;
+            .legs {
+                clip-path: $clip;
+                width: 25%;
+                height: 100%;
+                background-color: #060a29;
+            }
+        }
+    }
+    .frenzy {
+        width: $size / 2.5;
+        height: $size / 2.5;
+        background-color: #faf16d;
+        border-radius: 50%;
+        transform: translateX(-500px);
+        animation: frenzy-mode 2s linear 10s forwards alternate;
+    }
+}
+@keyframes pac-man {
+    0% {
+        clip-path: $clip
+    }
+    100% {
+        clip-path: $clipEnd;
+    }
+}
+@keyframes legs {
+    0% {
+        transform: translateX(0%);
+    }
+    100% {
+        transform: translateX(10%);
+    }
+}
+@keyframes frenzy-mode {
+    0% {
+        transform: translateX(-500px);
+        visibility: visible;
+    }
+    99.999% {
+        transform: translateX(400px);
+        visibility: hidden;
+    }
+    100% {
+        transform: translateX(400px);
+        visibility: hidden;
+    }
+}
+@keyframes rotate {
+    0% {
+        transform: scaleX(1);
+    }
+    70% {
+        transform: scaleX(1);
+    }
+    100% {
+        transform: scaleX(-1);
+    }
+}
+@keyframes ghost-weak {
+    0% {
+        background-color: #16238a;
+    }
+    70% {
+        background-color: #16238a;
+    }
+    75% {
+        background-color: #ff1111;
+    }
+    80% {
+        background-color: #16238a;
+    }
+    85% {
+        background-color: #ff1111;
+    }
+    90% {
+        background-color: #16238a;
+    }
+    100% {
+        background-color: #ff1111;
+    }
+}
+@keyframes ghost-eyes {
+    0% {
+        background-color: #0f1961;
+    }
+    100% {
+        background-color: white;
+    }
+}
+@keyframes mouth {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+input[type="button"] {
+    position: absolute;
+    bottom: 30px;
+    height: 40px;
+    background-color: #113dff;
+    color: white;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 24px;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.4s;
+    z-index: 99;
+    &:hover {
+        background-color: #2c439c;
+    }
+    
+}
